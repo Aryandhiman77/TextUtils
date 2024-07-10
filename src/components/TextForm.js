@@ -57,16 +57,16 @@ export default function TextForm(props) {
                 <h1>{props.heading}</h1>
                 <textarea className={`form-control bg-${props.mode} text-${props.mode==='light'?'dark':'light'}`} value={text} onChange={handleonchange} id='copytxt' rows="8"></textarea>
             </div>
-            <button className="btn btn-primary mb-2" onClick={handleupCase}>Convert to uppercase</button>
-            <button className="btn btn-primary mx-2 mb-2" onClick={handlelwCase}>Convert to lowercase</button>
-            <button className="btn btn-primary mx-2 mb-2" id='toggle' onClick={speak}>Speak</button>
-            <button className="btn btn-primary mx-2 mb-2"  onClick={cleartext}>Clear Text</button>
-            <button className="btn btn-primary mx-2 mb-2"  onClick={copyTxt}>Copy Text</button>
-            <button className="btn btn-primary mx-2 mb-2"  onClick={removeExtraSpaces}>Remove Extra Spaces</button>
+            <button disabled={text.length===0} className="btn btn-primary mx-2 mb-2" onClick={handleupCase}>Convert to uppercase</button>
+            <button disabled={text.length===0} className="btn btn-primary mx-2 mb-2" onClick={handlelwCase}>Convert to lowercase</button>
+            <button disabled={text.length===0} className="btn btn-primary mx-2 mb-2" id='toggle' onClick={speak}>Speak</button>
+            <button disabled={text.length===0} className="btn btn-primary mx-2 mb-2"  onClick={cleartext}>Clear Text</button>
+            <button disabled={text.length===0} className="btn btn-primary mx-2 mb-2"  onClick={copyTxt}>Copy Text</button>
+            <button disabled={text.length===0} className="btn btn-primary mx-2 mb-2"  onClick={removeExtraSpaces}>Remove Extra Spaces</button>
         </div>
         <div className={`container mt-3 text-${props.mode==='light'?'dark':'light'}`} >
             <h2>Your text summary</h2>
-            {`${text.split(' ').length===1 && text.length===0 ?'0':text.split(' ').length} words  ${text.length} Characters`}
+            {`${text.split(/\s+/).filter((element)=> {return element.length!==0}).length} words  ${text.length} Characters`}
             <div>can be read in {0.008 * text.length} Minutes.</div>
             <h3 className='mt-2'>Preview</h3>
             <p>{text}</p>
